@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Discount Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        #result p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Doctor Discount Calculator</h1>
+        <label for="totalEarned">Total Amount Earned (Cedis):</label>
+        <input type="number" id="totalEarned" placeholder="Enter total amount" required>
+        
+        <label for="xrayCount">Number of X-Rays Done:</label>
+        <input type="number" id="xrayCount" placeholder="Enter number of X-rays" required>
+        
+        <button onclick="calculateDiscount()">Calculate Discount</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateDiscount() {
+            // Get input values
+            const totalEarned = parseFloat(document.getElementById('totalEarned').value);
+            const xrayCount = parseInt(document.getElementById('xrayCount').value);
+            
+            // Validate inputs
+            if (isNaN(totalEarned) || isNaN(xrayCount) || totalEarned < 0 || xrayCount < 0) {
+                document.getElementById('result').innerHTML = '<p style="color: red;">Please enter valid positive numbers.</p>';
+                return;
+            }
+
+            // Calculate X-ray amount (200 cedis per X-ray)
+            const xrayAmount = xrayCount * 200;
+            
+            // Calculate lab amount (total - xray amount)
+            const labAmount = totalEarned - xrayAmount;
+            
+            // Validate lab amount
+            if (labAmount < 0) {
+                document.getElementById('result').innerHTML = '<p style="color: red;">X-ray amount exceeds total earned. Please check inputs.</p>';
+                return;
+            }
+
+            // Calculate discounts
+            const xrayDiscount = xrayAmount * 0.20; // 20% discount on X-rays
+            const labDiscount = labAmount * 0.15;   // 15% discount on labs
+            const totalDiscount = xrayDiscount + labDiscount;
+            
+            // Display results
+            document.getElementById('result').innerHTML = `
+                <p><strong>X-Ray Discount (20%):</strong> ${xrayDiscount.toFixed(2)} Cedis</p>
+                <p><strong>Lab Discount (15%):</strong> ${labDiscount.toFixed(2)} Cedis</p>
+                <p><strong>Total Discount:</strong> ${totalDiscount.toFixed(2)} Cedis</p>
+            `;
+        }
+    </script>
+</body>
+</html>
