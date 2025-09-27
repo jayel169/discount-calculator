@@ -99,13 +99,13 @@
 
             // Calculate discounts
             const xrayDiscount = xrayAmount * 0.20; // 20% discount on X-rays
-            const labDiscount = labAmount * 0.20;   // 15% discount on labs
+            const labDiscount = labAmount * 0.20;   // 20% discount on labs
             const totalDiscount = xrayDiscount + labDiscount;
             
             // Display results
             document.getElementById('result').innerHTML = `
                 <p><strong>X-Ray Discount (20%):</strong> ${xrayDiscount.toFixed(2)} Cedis</p>
-                <p><strong>Lab Discount (15%):</strong> ${labDiscount.toFixed(2)} Cedis</p>
+                <p><strong>Lab Discount (20%):</strong> ${labDiscount.toFixed(2)} Cedis</p>
                 <p><strong>Total Discount:</strong> ${totalDiscount.toFixed(2)} Cedis</p>
             `;
         }
